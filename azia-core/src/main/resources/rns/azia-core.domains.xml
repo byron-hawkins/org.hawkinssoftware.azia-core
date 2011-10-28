@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE orthogonal-scope SYSTEM "http://www.hawkinssoftware.net/dtd/domain-scope-1.4.dtd" >
+
+<orthogonal-scope>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.action.UserInterfaceActor.DependentActorDomain</domain>
+		<domain>org.hs.azia.ui.component.BoundedEntity.LayoutContainerDomain</domain> 
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.action.UserInterfaceActor.ActorDomain</domain>
+		<domain>org.hs.azia.ui.component.UserInterfaceHandler.HandlerDomain</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.role.UserInterfaceDomains.AssemblyDomain</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceActor.ActorDomain</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.role.UserInterfaceDomains.AssemblyDomain</domain>
+		<domain>org.hs.azia.ui.component.UserInterfaceHandler.HandlerDomain</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.role.UserInterfaceDomains.AssemblyDomain</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionFacilitation</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.role.UserInterfaceDomains.AssemblyDomain</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionElement</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.role.UserInterfaceDomains.AssemblyDomain</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionParticipant</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionFacilitation</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionElement</domain>
+	</orthogonal-set>
+	<orthogonal-set>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionFacilitation</domain>
+		<domain>org.hs.azia.ui.action.UserInterfaceTransactionDomains.TransactionParticipant</domain>
+  	</orthogonal-set> 
+ 	<domain-containment    
+		parent-domain="org.hs.azia.ui.action.UserInterfaceActor.ActorDomain"
+		child-domain="org.hs.azia.ui.action.UserInterfaceActor.DependentActorDomain" />
+</orthogonal-scope>                  
