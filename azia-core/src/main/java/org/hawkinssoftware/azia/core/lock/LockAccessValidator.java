@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.lock;
 
 import java.util.Map;
@@ -22,6 +32,15 @@ import org.hawkinssoftware.rns.core.role.TypeRole;
 class LockAccessValidator implements SemaphoreHook
 {
 	// enabled flag is recognized within the collection
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @param <K>
+	 *            the key type
+	 * @param <V>
+	 *            the value type
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	static class LockRegistryMapValidator<K, V> implements CollectionAccessValidator<Map<K, V>>
@@ -53,6 +72,13 @@ class LockAccessValidator implements SemaphoreHook
 	}
 
 	// enabled flag is recognized within the collection
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @param <T>
+	 *            the generic type
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	static class LockTransactionContextSetValidator<T> implements CollectionAccessValidator<Set<T>>
@@ -84,6 +110,11 @@ class LockAccessValidator implements SemaphoreHook
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	static class FieldAccessValidator
@@ -111,6 +142,11 @@ class LockAccessValidator implements SemaphoreHook
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	enum Semaphore

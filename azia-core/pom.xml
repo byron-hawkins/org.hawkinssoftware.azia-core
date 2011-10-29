@@ -67,7 +67,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<execute></execute>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -89,11 +89,6 @@
 	</build>
 
 	<repositories>
-		<repository>
-			<id>LWJGL</id>
-			<name>LWJGL on AdTerraSperaSpera</name>
-			<url>http://adterrasperaspera.com/lwjgl</url>
-		</repository>
 		<repository>
 			<id>apache-nexus</id>
 			<name>Apache Nexus</name>

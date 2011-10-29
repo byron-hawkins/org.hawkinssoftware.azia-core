@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.role;
 
 import java.lang.annotation.ElementType;
@@ -18,15 +28,30 @@ import org.hawkinssoftware.rns.core.moa.ExecutionPath;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.role.TypeRole;
 
+/**
+ * An asynchronous update interface for receiving notifications about Collaboration information as the Collaboration is
+ * constructed.
+ */
 @ExecutionPath.NoFrame
 public class CollaborationObserver implements ExecutionPath.StackObserver
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
 	public @interface Initiate
 	{
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	public static class Factory implements ExecutionPath.StackObserver.Factory<CollaborationObserver>
 	{
@@ -42,6 +67,11 @@ public class CollaborationObserver implements ExecutionPath.StackObserver
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	private static class DomainFootprint
 	{

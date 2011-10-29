@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.lock;
 
 import java.util.HashMap;
@@ -20,12 +30,23 @@ import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 import org.hawkinssoftware.rns.core.role.CoreDomains.InitializationDomain;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @ExecutionPath.NoFrame
 @DomainRole.Join(membership = { LockManagement.class, TransactionFacilitation.class })
 @HookSemaphores(hook = LockAccessValidator.class, instance = "getInstance()")
 @InvocationConstraint(packages = { "org.hawkinssoftware.azia.core.lock.*", "org.hawkinssoftware.azia.core.action.*" })
 public class LockRegistry
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	private static class InstantiationStack extends ThreadLocal<LockRegistrationStack>

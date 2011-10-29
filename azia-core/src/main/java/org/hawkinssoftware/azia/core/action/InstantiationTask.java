@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.action;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
@@ -8,8 +18,19 @@ import org.hawkinssoftware.azia.core.log.AziaLogging.Tag;
 import org.hawkinssoftware.rns.core.log.Log;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public interface InstantiationTask
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static abstract class Task
 	{
 		private final SynchronizationRole role;
@@ -37,6 +58,13 @@ public interface InstantiationTask
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @param <T>
+	 *            the generic type
+	 * @author Byron Hawkins
+	 */
 	public static abstract class Producer<T extends Producer<T>>
 	{
 		private final SynchronizationRole role;
@@ -67,6 +95,11 @@ public interface InstantiationTask
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@DomainRole.Join(membership = TransactionParticipant.class)
 	public static abstract class StandaloneInstantiationTask
 	{
@@ -110,6 +143,11 @@ public interface InstantiationTask
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static abstract class SubordinateTask
 	{
 		private final UserInterfaceActor actor;
@@ -135,6 +173,13 @@ public interface InstantiationTask
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @param <T>
+	 *            the generic type
+	 * @author Byron Hawkins
+	 */
 	public static abstract class SubordinateProducer<T extends SubordinateProducer<T>>
 	{
 		private final UserInterfaceActor actor;

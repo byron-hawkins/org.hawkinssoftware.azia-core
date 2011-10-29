@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.lock;
 
 import org.hawkinssoftware.azia.core.log.AziaLogging.Tag;
@@ -8,13 +18,29 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.role.TypeRole;
 import org.hawkinssoftware.rns.core.util.RNSUtils;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 interface UserInterfaceLockDomains
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	static class LockManagement extends DomainRole
 	{
 		@DomainRole.Instance
 		public static final LockManagement INSTANCE = new LockManagement();
 
+		/**
+		 * DOC comment task awaits.
+		 * 
+		 * @author Byron Hawkins
+		 */
 		static class ContainmentConstraint implements ExecutionPath.StackObserver
 		{
 			static ContainmentConstraint INSTANCE = new ContainmentConstraint();
@@ -49,6 +75,11 @@ interface UserInterfaceLockDomains
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	static class ThreadStateValidation extends DomainRole
 	{
 		@DomainRole.Instance

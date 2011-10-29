@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.lock;
 
 import java.util.concurrent.TimeUnit;
@@ -11,16 +21,32 @@ import org.hawkinssoftware.rns.core.lock.LockHook;
 import org.hawkinssoftware.rns.core.moa.ExecutionPath;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @ExecutionPath.NoFrame
 @DomainRole.Join(membership = LockManagement.class)
 class AutonomousLock extends UserInterfaceLock
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	enum RequestMode
 	{
 		IMMEDIATE,
 		WAIT;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	enum Result
 	{
 		SUCCESS,
@@ -29,6 +55,11 @@ class AutonomousLock extends UserInterfaceLock
 		TIMEOUT;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	enum Level
 	{
 		READ,
@@ -36,6 +67,11 @@ class AutonomousLock extends UserInterfaceLock
 		COMMIT;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = LockManagement.class)
 	private class Hook implements LockHook

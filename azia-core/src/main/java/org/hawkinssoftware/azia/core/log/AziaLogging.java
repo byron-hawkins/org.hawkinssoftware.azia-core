@@ -1,10 +1,31 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.log;
 
 import org.hawkinssoftware.rns.core.log.LogTag;
 import org.hawkinssoftware.rns.core.moa.ExecutionPath;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public class AziaLogging
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	public enum LogCategory implements LogTag.Category
 	{
@@ -27,6 +48,11 @@ public class AziaLogging
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public enum Mode
 	{
 		FATAL,
@@ -37,6 +63,11 @@ public class AziaLogging
 		NIT;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public enum Subsystem
 	{
 		LOCK,
@@ -44,15 +75,30 @@ public class AziaLogging
 		CANVAS;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public enum Task
 	{
 		ROUTER_INIT,
 		CONTAINMENT;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static class Tag
 	{
 		// WIP: special handling of logging with the ExecutionPath, or something. No frames in the logger, ever.
+		/**
+		 * DOC comment task awaits.
+		 * 
+		 * @author Byron Hawkins
+		 */
 		@ExecutionPath.NoFrame
 		private static class DebugWithNoSubsystems extends LogTag<LogCategory>
 		{

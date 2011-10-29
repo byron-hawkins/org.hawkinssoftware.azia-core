@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.lock;
 
 import java.util.ArrayList;
@@ -15,11 +25,22 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 
 // TODO: consider @ExecutionPath.NoFrame on everything in this package (introduce config file?)
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @ExecutionPath.NoFrame
 @DomainRole.Join(membership = { ThreadStateValidation.class, LockManagement.class })
 @HookSemaphores(hook = LockAccessValidator.class, instance = "getInstance()")
 class CrossLockValidator
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@ExecutionPath.NoFrame
 	@DomainRole.Join(membership = { ThreadStateValidation.class, LockManagement.class })
 	@HookSemaphores(hook = LockAccessValidator.class, instance = "getInstance()")

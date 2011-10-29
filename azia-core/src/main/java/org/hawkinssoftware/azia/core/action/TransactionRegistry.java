@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.action;
 
 import java.util.ArrayList;
@@ -14,9 +24,20 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @DomainRole.Join(membership = TransactionFacilitation.class)
 public class TransactionRegistry
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@InitializationAspect(agent = ListenerInitializationAgent.class)
 	@InvocationConstraint(domains = TransactionFacilitation.class)
 	@DomainRole.Join(membership = TransactionElement.class)
@@ -25,6 +46,11 @@ public class TransactionRegistry
 		Class<? extends UserInterfaceTransaction> transactionInitiated(Class<? extends UserInterfaceTransaction> type);
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@DomainRole.Join(membership = InitializationDomain.class)
 	public static class ListenerInitializationAgent implements InitializationAspect.Agent<Listener>
 	{

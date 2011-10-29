@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.action;
 
 import java.util.ArrayList;
@@ -13,6 +23,11 @@ import org.hawkinssoftware.rns.core.publication.VisibilityConstraint;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.util.DefinesIdentity;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @InvocationConstraint(domains = TransactionFacilitation.class)
 @VisibilityConstraint(domains = { TransactionParticipant.class, TransactionFacilitation.class, TransactionElement.class }, inherit = true)
 @ExtensionConstraint(domains = TransactionElement.class)
@@ -20,12 +35,24 @@ import org.hawkinssoftware.rns.core.util.DefinesIdentity;
 @DomainRole.Join(membership = { TransactionElement.class, TransactionParticipant.class })
 public interface UserInterfaceTransaction
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@InvocationConstraint(domains = TransactionFacilitation.class)
 	@ExtensionConstraint(domains = TransactionParticipant.class)
 	@DomainRole.Join(membership = TransactionParticipant.class)
 	@DefinesIdentity
 	public interface ActorBasedContributor
 	{
+		
+		/**
+		 * DOC comment task awaits.
+		 * 
+		 * @author Byron Hawkins
+		 */
 		@DomainRole.Join(membership = TransactionElement.class)
 		@InvocationConstraint(domains = { TransactionParticipant.class, TransactionFacilitation.class })
 		@ExtensionConstraint(domains = TransactionFacilitation.class)
@@ -66,6 +93,11 @@ public interface UserInterfaceTransaction
 		void actionPosted(UserInterfaceNotification notification, PendingTransaction transaction);
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@VisibilityConstraint(domains = { TransactionElement.class, TransactionFacilitation.class })
 	@InvocationConstraint(domains = TransactionElement.class)
 	@ExtensionConstraint(domains = TransactionFacilitation.class)
@@ -87,6 +119,11 @@ public interface UserInterfaceTransaction
 	}
 
 	// TODO: domains should somehow prevent this from getting tangled up in the transactions and directives
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@InvocationConstraint(domains = TransactionFacilitation.class)
 	@ExtensionConstraint(domains = TransactionElement.class)
 	@DomainRole.Join(membership = TransactionElement.class)
@@ -101,6 +138,11 @@ public interface UserInterfaceTransaction
 		void transactionRolledBack();
 	}
 	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public interface Iterative extends UserInterfaceTransaction
 	{
 		boolean hasMoreIterations();

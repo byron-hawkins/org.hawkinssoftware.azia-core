@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.azia.core.action;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor;
@@ -15,6 +25,11 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.role.RoleRegistry;
 import org.hawkinssoftware.rns.core.role.TypeRole;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @InitializationAspect(agent = UserInterfaceActor.Agent.class)
 @InvocationConstraint(domains = { TransactionFacilitation.class }, types = { UserInterfaceDirective.class, UserInterfaceDirective.Notification.class })
 @DomainRole.Join(membership = { UserInterfaceActor.ActorDomain.class })
@@ -22,6 +37,11 @@ public interface UserInterfaceActor extends ActorBasedContributor, UserInterface
 { 
 	void apply(UserInterfaceDirective action);
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public enum SynchronizationRole
 	{
 		SUBORDINATE,
@@ -29,6 +49,11 @@ public interface UserInterfaceActor extends ActorBasedContributor, UserInterface
 		AUTONOMOUS;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static class ActorDomain extends DomainRole
 	{
 		@DomainRole.Instance
@@ -48,6 +73,11 @@ public interface UserInterfaceActor extends ActorBasedContributor, UserInterface
 	}
 
 	// TODO: should not need to specify same file access
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@VisibilityConstraint(extendedTypes = UserInterfaceActor.class)
 	@DomainRole.Join(membership = { TransactionFacilitation.class, InitializationDomain.class })
 	public static class Agent implements InitializationAspect.Agent<UserInterfaceActor>
