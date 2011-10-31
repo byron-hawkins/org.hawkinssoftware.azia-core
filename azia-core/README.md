@@ -7,6 +7,10 @@ of the [Azia User Interface Library][parent].
 
 [parent]: https://github.com/byron-hawkins/org.hawkinssoftware.azia/blob/master/azia/README.md
 
+#### Artifact
+
+A pure Java library.
+
 #### Installation
 
 Add it as a project dependency, like any ordinary Java library.
