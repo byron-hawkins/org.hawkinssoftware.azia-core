@@ -4,12 +4,7 @@
 
 	<artifactId>azia-core</artifactId>
 	<packaging>jar</packaging>
-
 	<name>azia-core</name>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<build>
 
@@ -30,7 +25,7 @@
 								<artifactItem>
 									<groupId>org.hawkinssoftware.rns</groupId>
 									<artifactId>rns-agent</artifactId>
-									<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
+									<version>0.1.1-SNAPSHOT</version>
 									<outputDirectory>${project.build.directory}</outputDirectory>
 								</artifactItem>
 							</artifactItems>
@@ -67,20 +62,11 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute></execute>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -88,19 +74,11 @@
 
 	</build>
 
-	<repositories>
-		<repository>
-			<id>apache-nexus</id>
-			<name>Apache Nexus</name>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.hawkinssoftware.rns</groupId>
 			<artifactId>rns-core</artifactId>
-			<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
+			<version>0.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.bcel</groupId>
@@ -114,8 +92,8 @@
 	<parent>
 		<groupId>org.hawkinssoftware.azia</groupId>
 		<artifactId>azia</artifactId>
-		<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
-		<relativePath>../azia</relativePath>
+		<version>0.1.1-SNAPSHOT</version>
+		<relativePath>../../project/azia</relativePath>
 	</parent>
 
 </project>
