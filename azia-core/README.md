@@ -39,8 +39,8 @@ Add it as a project dependency, like any ordinary Java library.
        + An entity having no direct reference to any actor may
          look up the most relevant instance using 
          <code>[CompositionRegistry].getService(UserInterfaceActor.class)</code>
-    * Mutable fields may only be written during the commit phase
-      a transaction; see [azia-ui] about [UserInterfaceDirective]
+    * Mutable fields may only be written during the transaction
+      commit phase; see [azia-ui] about [UserInterfaceDirective]
 
 [azia-ui]: https://github.com/byron-hawkins/org.hawkinssoftware.azia-ui/blob/master/azia-ui/README.md
 [CompositionRegistry]: https://github.com/byron-hawkins/org.hawkinssoftware.azia-ui/blob/master/azia-ui/src/main/java/org/hawkinssoftware/azia/ui/component/composition/CompositionRegistry.java
