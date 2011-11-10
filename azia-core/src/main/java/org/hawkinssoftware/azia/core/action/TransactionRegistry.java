@@ -25,14 +25,16 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 /**
- * DOC comment task awaits.
+ * Public entry point for executing <code>UserInterfaceTask</code>s. At present the TransactionRegistry should not be
+ * used for anything else.
  * 
  * @author Byron Hawkins
+ * @see UserInterfaceTask
  */
 @DomainRole.Join(membership = TransactionFacilitation.class)
 public class TransactionRegistry
 {
-	
+
 	/**
 	 * DOC comment task awaits.
 	 * 

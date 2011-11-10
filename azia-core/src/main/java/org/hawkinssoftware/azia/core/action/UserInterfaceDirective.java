@@ -16,16 +16,26 @@ import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
 /**
- * DOC comment task awaits.
+ * A UserInterfaceDirective constitutes a proposition to modify one or more fields that are locked under central
+ * transaction management. The directive must be contributed to an active <code>UserInterfaceTransaction</code>, and
+ * <code>commit()</code> will be called by the transaction engine. Contribution may occur at the beginning of a
+ * transaction, as provided for by the particular subclass of UITransaction, or it may occur in response to a
+ * <code>UserInterfaceNotification</code> received by a transaction participant.
+ * <p>
+ * Upon contribution to the transaction, all its participants will receive the notification produced by
+ * <code>createNotification()</code>, so a UIDirective subclass wishing to be publicly known for collaboration purposes
+ * must define and return a meaningful notification.
  * 
  * @author Byron Hawkins
+ * @see UserInterfaceTransaction
+ * @see UserInterfaceNotification
  */
 @DomainRole.Join(membership = TransactionElement.class)
 public abstract class UserInterfaceDirective implements UserInterfaceActorDelegate
 {
-	
 	/**
-	 * DOC comment task awaits.
+	 * A generic notification to be sent on behalf of any <code>UserInterfaceDirective</code> subclass not wishing to
+	 * broadcast a more specific notification about its participation in a transaction.
 	 * 
 	 * @author Byron Hawkins
 	 */

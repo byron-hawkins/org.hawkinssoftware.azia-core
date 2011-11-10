@@ -29,27 +29,30 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 /**
- * DOC comment task awaits.
+ * Internal facilitation of the <code>UserInterfaceTransaction.Session</code>.
  * 
  * @author Byron Hawkins
  */
 @DomainRole.Join(membership = TransactionFacilitation.class)
 class UserInterfaceTransactionSession
 {
-	
 	/**
-	 * DOC comment task awaits.
+	 * Internal implementation of the <code>UserInterfaceTransaction.Session</code>.
 	 * 
 	 * @author Byron Hawkins
 	 */
 	@DomainRole.Join(membership = TransactionFacilitation.class)
 	private class TransactionSession implements UserInterfaceTransaction.Session
 	{
-		
+
 		/**
-		 * DOC comment task awaits.
+		 * Pends a <code>UserInterfaceNotification</code> in association with a <code>UserInterfaceActorDelegate</code>
+		 * if applicable, guaranteeing to lock that UIActor before sending the UINotification when a UIActor is
+		 * available.
 		 * 
 		 * @author Byron Hawkins
+		 * @see UserInterfaceActorDelegate
+		 * @see UserInterfaceNotification
 		 */
 		@DomainRole.Join(membership = TransactionFacilitation.class)
 		private class PendingBroadcast
@@ -194,15 +197,32 @@ class UserInterfaceTransactionSession
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Defines the sequence of phases of a <code>UserInterfaceTransaction</code>.
 	 * 
 	 * @author Byron Hawkins
 	 */
 	private enum Phase
 	{
+		/**
+		 * The session is idle, there is no current transaction.
+		 */
 		IDLE,
+		/**
+		 * The current transaction is being assembled. Each instance of <code>UserInterfaceActor</code> related to the
+		 * <code>UserInterfaceDirective</code>s in the transaction are locked in assembly phase, meaning fields
+		 * protected under their locks can be read, and cannot be allocated to any other assembly transaction until this
+		 * one has committed or rolled back.
+		 */
 		ASSEMBLY,
+		/**
+		 * The current transaction is being committed. Fields protected under the locks of the
+		 * <code>UserInterfaceActor</code>s in this transaction are writable.
+		 */
 		COMMIT,
+		/**
+		 * The current transaction is being post-processed. All <code>PostProcessor</code>s are executed at this time.
+		 * All locks have been released.
+		 */
 		POST_PROCESSING;
 	}
 
@@ -381,7 +401,7 @@ class UserInterfaceTransactionSession
 		{
 			postProcessor.sessionStarting();
 		}
-		LockRegistry.getInstance().beginSession(); 
+		LockRegistry.getInstance().beginSession();
 
 		phase = Phase.ASSEMBLY;
 		return joinSession(transactionType);

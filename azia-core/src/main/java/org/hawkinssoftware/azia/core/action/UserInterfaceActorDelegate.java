@@ -18,9 +18,12 @@ import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
 /**
- * DOC comment task awaits.
+ * By implementing this interface, the Delegate declares a concrete association with exactly one instance of
+ * <code>UserInterfaceActor</code>, which it specifies by the return value of <code>getActor()</code>. It is expected
+ * that this actor will never change, and if it does, actor-based features may not work correctly.
  * 
  * @author Byron Hawkins
+ * @see UserInterfaceActor
  */
 @DomainRole.Join(membership = { TransactionElement.class, TransactionParticipant.class })
 @InvocationConstraint(domains = { TransactionFacilitation.class, TransactionElement.class })
