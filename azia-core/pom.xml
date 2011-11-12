@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>org.apache.bcel</groupId>
 			<artifactId>bcel</artifactId>
-			<version>6.0-20110805.040858-2</version>
+			<version>6.0-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
