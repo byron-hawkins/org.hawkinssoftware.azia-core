@@ -10,10 +10,14 @@
  */
 package org.hawkinssoftware.azia.core.layout;
 
+import java.awt.geom.Rectangle2D;
+
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDomain;
 import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 import org.hawkinssoftware.rns.core.publication.VisibilityConstraint;
 import org.hawkinssoftware.rns.core.role.DomainRole;
+import org.hawkinssoftware.rns.core.role.DomainRole.Join;
+import org.hawkinssoftware.rns.core.util.UnknownEnumConstantException;
 
 /**
  * DOC comment task awaits.
@@ -69,5 +73,70 @@ public enum Axis
 		int getExtent(Axis axis);
 
 		int getSpan(Axis axis);
+
+		public static class Double implements Axis.Bounds
+		{
+			public Rectangle2D bounds;
+
+			public Double(double x, double y, double width, double height)
+			{
+				bounds = new Rectangle2D.Double(x, y, width, height);
+			}
+
+			public Double(Rectangle2D bounds)
+			{
+				this.bounds = bounds;
+			}
+
+			@Override
+			public int getExtent(Axis axis)
+			{
+				return getPosition(axis) + getExtent(axis);
+			}
+
+			@Override
+			public int getPosition(Axis axis)
+			{
+				switch (axis)
+				{
+					case H:
+						return (int) Math.round(bounds.getX());
+					case V:
+						return (int) Math.round(bounds.getY());
+					default:
+						throw new UnknownEnumConstantException(axis);
+				}
+			}
+
+			@Override
+			public int getSpan(Axis axis)
+			{
+				switch (axis)
+				{
+					case H:
+						return (int) Math.round(bounds.getWidth());
+					case V:
+						return (int) Math.round(bounds.getHeight());
+					default:
+						throw new UnknownEnumConstantException(axis);
+				}
+			}
+
+		}
+	}
+
+	@DomainRole.Join(membership = DisplayBoundsDomain.class)
+	public static class Span
+	{
+		public final Axis axis;
+		public final int position;
+		public final int span;
+
+		public Span(Axis axis, int position, int span)
+		{
+			this.axis = axis;
+			this.position = position;
+			this.span = span;
+		}
 	}
 }

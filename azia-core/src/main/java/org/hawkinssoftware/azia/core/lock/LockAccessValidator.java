@@ -258,6 +258,5 @@ class LockAccessValidator implements SemaphoreHook
 
 	void lockReleased(AutonomousLock lock, AutonomousLock.Level level)
 	{
-
 	}
 }

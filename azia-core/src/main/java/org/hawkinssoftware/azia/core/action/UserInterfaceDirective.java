@@ -80,7 +80,7 @@ public abstract class UserInterfaceDirective implements UserInterfaceActorDelega
 
 	// TODO: kind of nebulous for the client to figure out this needs to be overridden for a meaningful notification
 	// to be sent
-	@InvocationConstraint(domains = { TransactionFacilitation.class, TransactionElement.class }, inherit = true)
+	@InvocationConstraint(domains = { TransactionFacilitation.class }, inherit = true)
 	public UserInterfaceNotification createNotification()
 	{
 		return new Notification();
