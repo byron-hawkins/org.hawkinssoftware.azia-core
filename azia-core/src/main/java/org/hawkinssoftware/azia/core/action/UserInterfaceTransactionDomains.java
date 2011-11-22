@@ -13,15 +13,15 @@ package org.hawkinssoftware.azia.core.action;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
 /**
- * DOC comment task awaits.
+ * Shell interface for <code>DomainRole</code>s related to transactions.
  * 
  * @author Byron Hawkins
  */
 public interface UserInterfaceTransactionDomains
 {
-	
+
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to the Azia UI Library's internal implementation of transaction processing.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -32,7 +32,7 @@ public interface UserInterfaceTransactionDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain incorporating all types which may be collected into a transaction or its session.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -43,7 +43,7 @@ public interface UserInterfaceTransactionDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain incorporating all classes which contact the <code>TransactionFacilitation</code> domain.
 	 * 
 	 * @author Byron Hawkins
 	 */

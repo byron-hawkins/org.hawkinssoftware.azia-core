@@ -13,15 +13,14 @@ package org.hawkinssoftware.azia.core.role;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
 /**
- * DOC comment task awaits.
+ * Shell interface for the global <code>DomainRole</code>s of the Azia UI Library.
  * 
  * @author Byron Hawkins
  */
 public interface UserInterfaceDomains
 {
-	
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to classes participating in the assembly of the application and its compositions.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -32,7 +31,7 @@ public interface UserInterfaceDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to the composing of <code>InstancePainter</code>.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -43,7 +42,7 @@ public interface UserInterfaceDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to screen rendering.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -54,7 +53,7 @@ public interface UserInterfaceDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to the maintenance of displayable bounds.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -65,7 +64,7 @@ public interface UserInterfaceDomains
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Domain exclusive to the integration of flyweights (aka. "stamps") into a collection display.
 	 * 
 	 * @author Byron Hawkins
 	 */
