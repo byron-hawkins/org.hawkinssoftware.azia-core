@@ -27,7 +27,6 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 @DomainRole.Join(membership = { TransactionElement.class, TransactionParticipant.class })
 public abstract class UserInterfaceTask
 {
-
 	/**
 	 * Specifies the phase of the transaction during which this task should be executed.
 	 * 
@@ -105,6 +104,11 @@ public abstract class UserInterfaceTask
 	protected void setRetryCount(int maximumRetryCount)
 	{
 		this.maximumRetryCount = maximumRetryCount;
+	}
+
+	public void start() throws ConcurrentAccessException
+	{
+		TransactionRegistry.executeTask(this);
 	}
 
 	public int getRetryCount()

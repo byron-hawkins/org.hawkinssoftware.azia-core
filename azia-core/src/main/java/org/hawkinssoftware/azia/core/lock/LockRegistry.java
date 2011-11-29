@@ -97,7 +97,7 @@ public class LockRegistry
 		if (stack.isEmpty())
 		{
 			throw new IllegalStateException(
-					"Attempt to register an actor with no lock on the registration stack. Please execute instantiation within a UserInterfaceActor.InstantiationTask.");
+					"Attempt to register an actor with no lock on the registration stack. Please execute instantiation within an InstantiationTask.");
 		}
 
 		LockTransactionContext context = LockTransactionContext.get();

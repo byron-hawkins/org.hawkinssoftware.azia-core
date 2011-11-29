@@ -25,7 +25,6 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
  */
 public interface InstantiationTask
 {
-	
 	/**
 	 * DOC comment task awaits.
 	 * 
