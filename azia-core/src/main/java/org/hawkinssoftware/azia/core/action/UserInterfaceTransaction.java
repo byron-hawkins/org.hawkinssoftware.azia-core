@@ -204,6 +204,8 @@ public interface UserInterfaceTransaction
 	void setSession(Session session);
 
 	void transactionIntroduced(Class<? extends UserInterfaceTransaction> introducedTransactionType);
+	
+	void addActionsOn(List<UserInterfaceDirective> actions, UserInterfaceActor actor);
 
 	void postDirectResponse(UserInterfaceDirective... actions);
 
@@ -212,6 +214,8 @@ public interface UserInterfaceTransaction
 	void postNotificationFromAnotherTransaction(UserInterfaceNotification notification);
 
 	void commitTransaction();
+	
+	void transactionRolledBack();
 
 	@InvocationConstraint(domains = { TransactionFacilitation.class, TransactionElement.class, TransactionParticipant.class })
 	boolean isEmpty();

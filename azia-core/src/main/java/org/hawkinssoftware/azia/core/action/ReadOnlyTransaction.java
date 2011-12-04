@@ -10,6 +10,8 @@
  */
 package org.hawkinssoftware.azia.core.action;
 
+import java.util.List;
+
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
 /**
@@ -39,6 +41,12 @@ public class ReadOnlyTransaction implements UserInterfaceTransaction
 	}
 
 	@Override
+	public void addActionsOn(List<UserInterfaceDirective> actions, UserInterfaceActor actor)
+	{
+		// takes no action
+	}
+
+	@Override
 	public void postDirectResponse(UserInterfaceDirective... actions)
 	{
 		throw new UnsupportedOperationException("The read-only transaction does not support directives.");
@@ -57,6 +65,11 @@ public class ReadOnlyTransaction implements UserInterfaceTransaction
 
 	@Override
 	public void commitTransaction()
+	{
+	}
+
+	@Override
+	public void transactionRolledBack()
 	{
 	}
 

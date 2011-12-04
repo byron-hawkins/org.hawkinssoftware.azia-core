@@ -108,7 +108,10 @@ public abstract class UserInterfaceTask
 
 	public void start() throws ConcurrentAccessException
 	{
-		TransactionRegistry.executeTask(this);
+		if (session == null)
+		{
+			TransactionRegistry.executeTask(this);
+		}
 	}
 
 	public int getRetryCount()

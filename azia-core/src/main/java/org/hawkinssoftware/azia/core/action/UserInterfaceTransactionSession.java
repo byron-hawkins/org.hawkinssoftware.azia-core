@@ -235,6 +235,16 @@ class UserInterfaceTransactionSession
 
 	private final List<UserInterfaceTask> taskStack = new ArrayList<UserInterfaceTask>();
 
+	List<UserInterfaceDirective> getActionsOn(UserInterfaceActor actor)
+	{
+		List<UserInterfaceDirective> actions = new ArrayList<UserInterfaceDirective>();
+		for (TransactionSession session : sessions.values())
+		{
+			session.transaction.addActionsOn(actions, actor);
+		}
+		return actions;
+	}
+	
 	void executeTask(UserInterfaceTask task) throws UserInterfaceTask.ConcurrentAccessException
 	{
 		switch (phase)
@@ -523,6 +533,11 @@ class UserInterfaceTransactionSession
 
 	void rollbackSession()
 	{
+		for (TransactionSession session : sessions.values())
+		{
+			session.transaction.transactionRolledBack();
+		}
+		
 		terminateSession();
 
 		try

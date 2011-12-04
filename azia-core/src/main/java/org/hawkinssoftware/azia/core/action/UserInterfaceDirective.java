@@ -10,6 +10,9 @@
  */
 package org.hawkinssoftware.azia.core.action;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionElement;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionFacilitation;
 import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
@@ -76,6 +79,11 @@ public abstract class UserInterfaceDirective implements UserInterfaceActorDelega
 	public final UserInterfaceActor getActor()
 	{
 		return actor;
+	}
+	
+	public List<UserInterfaceActorPreview> getPreviews(UserInterfaceDirective action)
+	{
+		return Collections.emptyList();
 	}
 
 	// TODO: kind of nebulous for the client to figure out this needs to be overridden for a meaningful notification

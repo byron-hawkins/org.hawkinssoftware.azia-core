@@ -16,7 +16,6 @@ import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDoma
 import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 import org.hawkinssoftware.rns.core.publication.VisibilityConstraint;
 import org.hawkinssoftware.rns.core.role.DomainRole;
-import org.hawkinssoftware.rns.core.role.DomainRole.Join;
 import org.hawkinssoftware.rns.core.util.UnknownEnumConstantException;
 
 /**

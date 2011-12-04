@@ -34,7 +34,6 @@ import com.google.common.collect.Multimap;
 @DomainRole.Join(membership = TransactionFacilitation.class)
 public class TransactionRegistry
 {
-
 	/**
 	 * DOC comment task awaits.
 	 * 
@@ -84,6 +83,11 @@ public class TransactionRegistry
 	public static void failCurrentTask(UserInterfaceTask.CollisionStatus status)
 	{
 		SESSIONS.get().failCurrentTask(status);
+	}
+	
+	static List<UserInterfaceDirective> getActionsOn(UserInterfaceActor actor)
+	{
+		return SESSIONS.get().getActionsOn(actor);
 	}
 
 	private static TransactionRegistry INSTANCE;

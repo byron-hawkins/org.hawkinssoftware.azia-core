@@ -45,6 +45,19 @@ public class GenericTransaction implements UserInterfaceTransaction
 	}
 
 	@Override
+	public void addActionsOn(List<UserInterfaceDirective> actions, UserInterfaceActor actor)
+	{
+		for (int i = transaction.size()-1; i >= 0; i--)
+		{
+			UserInterfaceDirective action = transaction.get(i);
+			if (action.getActor() == actor)
+			{
+				actions.add(action);
+			}
+		}
+	}
+
+	@Override
 	public void postDirectResponse(UserInterfaceDirective... actions)
 	{
 		for (UserInterfaceDirective action : actions)
@@ -75,6 +88,11 @@ public class GenericTransaction implements UserInterfaceTransaction
 		{
 			action.commit();
 		}
+	}
+
+	@Override
+	public void transactionRolledBack()
+	{
 	}
 
 	@Override
