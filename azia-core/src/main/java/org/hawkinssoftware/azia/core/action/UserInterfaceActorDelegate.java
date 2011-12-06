@@ -25,9 +25,9 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
  * @author Byron Hawkins
  * @see UserInterfaceActor
  */
-@DomainRole.Join(membership = { TransactionElement.class, TransactionParticipant.class })
 @InvocationConstraint(domains = { TransactionFacilitation.class, TransactionElement.class })
 @ExtensionConstraint(domains = TransactionParticipant.class)
+@DomainRole.Join(membership = { TransactionElement.class, TransactionParticipant.class })
 public interface UserInterfaceActorDelegate
 {
 	UserInterfaceActor getActor();

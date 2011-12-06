@@ -1,20 +1,126 @@
 package org.hawkinssoftware.azia.core.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionElement;
+import org.hawkinssoftware.rns.core.moa.ExecutionContext;
+import org.hawkinssoftware.rns.core.moa.ExecutionPath;
+import org.hawkinssoftware.rns.core.moa.ExecutionStackFrame;
+import org.hawkinssoftware.rns.core.role.DomainRole;
+
+@ExecutionPath.NoFrame
 public class UserInterfaceTransactionQuery
 {
-	private static final ThreadLocal<ModeContainer> QUERY_MODE = new ThreadLocal<ModeContainer>() {
+	private static final ThreadLocal<ModeStack> QUERY_MODE = new ThreadLocal<ModeStack>() {
 		@Override
-		protected ModeContainer initialValue()
+		protected ModeStack initialValue()
 		{
-			return new ModeContainer();
+			return new ModeStack();
 		}
 	};
 
-	private static class ModeContainer
+	@ExecutionPath.NoFrame
+	private static class ModeStack extends ExecutionContext
 	{
-		private Mode mode = Mode.IGNORE_TRANSACTIONAL_CHANGES;
+		private static final Mode DEFAULT_MODE = Mode.READ_TRANSACTIONAL_CHANGES;
+
+		private final List<Frame> frames = new ArrayList<Frame>();
+
+		private Frame currentFrame = null;
+
+		void changeMode(Mode newMode)
+		{
+			if (currentFrame == null)
+			{
+				if (newMode == DEFAULT_MODE)
+				{
+					return;
+				}
+
+				ExecutionPath.installExecutionContext(Key.INSTANCE, this);
+			}
+			else
+			{
+				if (currentFrame.mode == newMode)
+				{
+					return;
+				}
+
+				if (currentFrame.invocationDepth == 0)
+				{
+					currentFrame.mode = newMode;
+					return;
+				}
+			}
+
+			Frame frame = new Frame(newMode);
+			frames.add(frame);
+			currentFrame = frame;
+		}
+
+		Mode getCurrentMode()
+		{
+			if (currentFrame == null)
+			{
+				return DEFAULT_MODE;
+			}
+			else
+			{
+				return currentFrame.mode;
+			}
+		}
+
+		@Override
+		protected void pushFrame(ExecutionStackFrame frame)
+		{
+			currentFrame.invocationDepth++;
+		}
+
+		@Override
+		protected void popFromFrame(ExecutionStackFrame frame)
+		{
+			if (currentFrame.invocationDepth == 0)
+			{
+				frames.remove(frames.size() - 1);
+				if (frames.isEmpty())
+				{
+					currentFrame = null;
+					ExecutionPath.removeExecutionContext(Key.INSTANCE);
+				}
+				else
+				{
+					currentFrame = frames.get(frames.size() - 1);
+				}
+			}
+			else
+			{
+				currentFrame.invocationDepth--;
+			}
+		}
+
+		@ExecutionPath.NoFrame
+		private class Frame
+		{
+			Mode mode;
+			int invocationDepth = 0;
+
+			Frame(Mode mode)
+			{
+				this.mode = mode;
+			}
+		}
+
+		/**
+		 * DOC comment task awaits.
+		 * 
+		 * @author Byron Hawkins
+		 */
+		@ExecutionPath.NoFrame
+		private static final class Key implements ExecutionContext.Key<ModeStack>
+		{
+			static final Key INSTANCE = new Key();
+		}
 	}
 
 	public enum Mode
@@ -23,7 +129,8 @@ public class UserInterfaceTransactionQuery
 		IGNORE_TRANSACTIONAL_CHANGES;
 	}
 
-	public static class Node<T>
+	@DomainRole.Join(membership = TransactionElement.class)
+	public static final class Node<T>
 	{
 		final T value;
 
@@ -36,7 +143,7 @@ public class UserInterfaceTransactionQuery
 		{
 			Child currentChildValue = property.getCurrentValue(value);
 
-			if (readTransactionalChanges())
+			if (isReadingTransactionalChanges())
 			{
 				UserInterfaceActor actor = null;
 				UserInterfaceActorPreview.Host previewHost = null;
@@ -119,11 +226,11 @@ public class UserInterfaceTransactionQuery
 
 	public static void setReadTransactionalChanges(boolean b)
 	{
-		QUERY_MODE.get().mode = b ? Mode.READ_TRANSACTIONAL_CHANGES : Mode.IGNORE_TRANSACTIONAL_CHANGES;
+		QUERY_MODE.get().changeMode(b ? Mode.READ_TRANSACTIONAL_CHANGES : Mode.IGNORE_TRANSACTIONAL_CHANGES);
 	}
 
-	private static boolean readTransactionalChanges()
+	public static boolean isReadingTransactionalChanges()
 	{
-		return QUERY_MODE.get().mode == Mode.READ_TRANSACTIONAL_CHANGES;
+		return QUERY_MODE.get().getCurrentMode() == Mode.READ_TRANSACTIONAL_CHANGES;
 	}
 }

@@ -24,6 +24,7 @@ import org.hawkinssoftware.rns.core.util.UnknownEnumConstantException;
  * @author Byron Hawkins
  */
 @VisibilityConstraint(domains = DisplayBoundsDomain.class)
+@DomainRole.Join(membership = DisplayBoundsDomain.class)
 public enum Axis
 {
 	H
