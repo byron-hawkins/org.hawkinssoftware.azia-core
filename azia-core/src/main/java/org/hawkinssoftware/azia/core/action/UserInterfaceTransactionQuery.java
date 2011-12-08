@@ -146,22 +146,17 @@ public class UserInterfaceTransactionQuery
 			if (isReadingTransactionalChanges())
 			{
 				UserInterfaceActor actor = null;
-				UserInterfaceActorPreview.Host previewHost = null;
 				if (value instanceof UserInterfaceActorDelegate)
 				{
 					actor = ((UserInterfaceActorDelegate) value).getActor();
-					if (actor instanceof UserInterfaceActorPreview.Host)
-					{
-						previewHost = (UserInterfaceActorPreview.Host) actor;
-					}
 				}
 
-				if (previewHost != null)
+				if ((actor != null) && actor.hasPreviews())
 				{
 					List<UserInterfaceDirective> actions = TransactionRegistry.getActionsOn(actor);
 					for (UserInterfaceDirective action : actions)
 					{
-						List<UserInterfaceActorPreview> previews = previewHost.getPreviews(action);
+						List<UserInterfaceActorPreview> previews = actor.getPreviews(action);
 						for (UserInterfaceActorPreview preview : previews)
 						{
 							if (preview.affects(property))

@@ -10,6 +10,8 @@
  */
 package org.hawkinssoftware.azia.core.action;
 
+import java.util.List;
+
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionFacilitation;
 import org.hawkinssoftware.azia.core.layout.BoundedEntity.LayoutContainerDomain;
@@ -50,6 +52,12 @@ import org.hawkinssoftware.rns.core.validation.ValidateWrite;
 public interface UserInterfaceActor extends ActorBasedContributor, UserInterfaceActorDelegate
 {
 	void apply(UserInterfaceDirective action);
+
+	@InvocationConstraint(types = UserInterfaceTransactionQuery.Node.class)
+	boolean hasPreviews();
+
+	@InvocationConstraint(types = UserInterfaceTransactionQuery.Node.class)
+	List<UserInterfaceActorPreview> getPreviews(UserInterfaceDirective action);
 
 	/**
 	 * Specifies a lock type for a <code>UserInterfaceActor</code>. The Role is held by the member classes of the

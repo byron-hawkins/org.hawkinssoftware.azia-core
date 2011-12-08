@@ -12,6 +12,7 @@ package org.hawkinssoftware.azia.core.action;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTask.ConcurrentAccessException;
+import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionElement;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransactionDomains.TransactionParticipant;
 import org.hawkinssoftware.azia.core.lock.LockRegistry;
 import org.hawkinssoftware.azia.core.log.AziaLogging.Tag;
@@ -147,13 +148,14 @@ public interface InstantiationTask
 	 * 
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = TransactionElement.class)
 	public static abstract class SubordinateTask
 	{
 		private final UserInterfaceActor actor;
 
-		public SubordinateTask(UserInterfaceActor actor)
+		public SubordinateTask(UserInterfaceActorDelegate actor)
 		{
-			this.actor = actor;
+			this.actor = actor.getActor();
 		}
 
 		protected abstract void execute();
@@ -179,13 +181,14 @@ public interface InstantiationTask
 	 *            the generic type
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = TransactionElement.class)
 	public static abstract class SubordinateProducer<T extends SubordinateProducer<T>>
 	{
 		private final UserInterfaceActor actor;
 
-		public SubordinateProducer(UserInterfaceActor actor)
+		public SubordinateProducer(UserInterfaceActorDelegate actor)
 		{
-			this.actor = actor;
+			this.actor = actor.getActor();
 		}
 
 		protected abstract void execute();
