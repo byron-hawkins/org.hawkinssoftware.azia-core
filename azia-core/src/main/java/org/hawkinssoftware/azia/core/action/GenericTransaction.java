@@ -39,6 +39,11 @@ public class GenericTransaction implements UserInterfaceTransaction
 		session.postAction(action);
 	}
 
+	public void addNotification(UserInterfaceNotification.Directed notification)
+	{
+		session.postNotification(notification);
+	}
+
 	@Override
 	public void transactionIntroduced(Class<? extends UserInterfaceTransaction> introducedTransactionType)
 	{
@@ -47,7 +52,7 @@ public class GenericTransaction implements UserInterfaceTransaction
 	@Override
 	public void addActionsOn(List<UserInterfaceDirective> actions, UserInterfaceActor actor)
 	{
-		for (int i = transaction.size()-1; i >= 0; i--)
+		for (int i = transaction.size() - 1; i >= 0; i--)
 		{
 			UserInterfaceDirective action = transaction.get(i);
 			if (action.getActor() == actor)
