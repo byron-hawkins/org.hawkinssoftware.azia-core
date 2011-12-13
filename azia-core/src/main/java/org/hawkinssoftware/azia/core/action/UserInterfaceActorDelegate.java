@@ -31,4 +31,12 @@ import org.hawkinssoftware.rns.core.role.DomainRole;
 public interface UserInterfaceActorDelegate
 {
 	UserInterfaceActor getActor();
+
+	public static final class Comparator
+	{
+		public static boolean isSameActor(UserInterfaceActorDelegate first, UserInterfaceActorDelegate second)
+		{
+			return first.getActor() == second.getActor();
+		}
+	}
 }
