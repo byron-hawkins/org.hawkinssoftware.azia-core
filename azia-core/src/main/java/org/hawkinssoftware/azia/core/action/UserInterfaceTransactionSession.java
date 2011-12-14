@@ -244,7 +244,7 @@ class UserInterfaceTransactionSession
 		}
 		return actions;
 	}
-	
+
 	void executeTask(UserInterfaceTask task) throws UserInterfaceTask.ConcurrentAccessException
 	{
 		switch (phase)
@@ -365,6 +365,14 @@ class UserInterfaceTransactionSession
 						reachedCommit = true;
 						if (successfulExecution)
 						{
+							/**
+							 * @JTourBusStop 4.1, ReCopyHandler participates in mouse and keyboard transactions,
+							 *               Internal transaction engine commits:
+							 * 
+							 *               After executing all tasks in the current transaction (above), this
+							 *               transaction is committed (4.11), resulting in the commit of each of its
+							 *               actions (4.12).
+							 */
 							commitSession();
 						}
 						else
@@ -465,6 +473,14 @@ class UserInterfaceTransactionSession
 		return session.transaction;
 	}
 
+	/**
+	 * @JTourBusStop 4.11, ReCopyHandler participates in mouse and keyboard transactions, Internal transaction commit
+	 *               process:
+	 * 
+	 *               Transaction listeners may spontaneously attach a new transaction to any running transaction, and
+	 *               each transaction in the group is represented here as a TransactionSession. The commit is applied to
+	 *               each of these sessions in sequence.
+	 */
 	private void commitSession()
 	{
 		if (phase != Phase.ASSEMBLY)
@@ -537,7 +553,7 @@ class UserInterfaceTransactionSession
 		{
 			session.transaction.transactionRolledBack();
 		}
-		
+
 		terminateSession();
 
 		try

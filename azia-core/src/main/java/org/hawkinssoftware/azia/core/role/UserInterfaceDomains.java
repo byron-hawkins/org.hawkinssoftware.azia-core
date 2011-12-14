@@ -63,6 +63,7 @@ public interface UserInterfaceDomains
 		public static final DisplayBoundsDomain INSTANCE = new DisplayBoundsDomain();
 	}
 
+	// WIP: what's really the distinction between ModelListDomain and FlyCellDomain?
 	/**
 	 * Domain exclusive to the integration of flyweights (aka. "stamps") into a collection display.
 	 * 
