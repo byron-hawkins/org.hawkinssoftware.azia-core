@@ -54,6 +54,16 @@ import org.hawkinssoftware.rns.core.util.DefinesIdentity;
  * @see UserInterfaceTransaction.PendingTransaction
  * @see UserInterfaceTransaction.ActorBasedContributor
  * @see TransactionRegistry
+ * 
+ * @JTourBusStop 2, Usage of @DefinesIdentity in Azia, Identity root - UserInterfaceTransaction:
+ * 
+ *               A transaction is a fundamental base type because all collaboration amongst user interface components in
+ *               an Azia application occurs in the form of transactions (instead of the classic event model). The @DefinesIdentity
+ *               on ComponentAssembly, as seen in tour stop #1, combines with this @DefinesIdentity to form an
+ *               orthogonal between assemblies and transactions; i.e., no class may be both an assembly descriptor and a
+ *               transaction. The value of this orthogonal is simply to focus the purpose of the concrete assembly and
+ *               transaction classes--the idea of a class which is both an assembly descriptor and a transaction is just
+ *               too confusing to be worthwhile.
  */
 @InvocationConstraint(domains = TransactionFacilitation.class)
 @VisibilityConstraint(domains = { TransactionParticipant.class, TransactionFacilitation.class, TransactionElement.class }, inherit = true)
@@ -72,6 +82,25 @@ public interface UserInterfaceTransaction
 	 * as <code>VirtualComponent</code>, <code>AbstractEventDispatch</code>, etc.
 	 * 
 	 * @author Byron Hawkins
+	 * 
+	 * @JTourBusStop 3, Usage of @DefinesIdentity in Azia, Identity root - ActorBasedContributor:
+	 * 
+	 *               This interface is a fundamental base type because an implementor becomes eligible to receive direct
+	 *               notification of transactional activity for any UserInterfaceActor. Requests for notification are
+	 *               made to TransactionRegistry.getInstance().addActorBasedContributor(), linking the requestor with a
+	 *               specific UserInterfaceActor instance. The @DefinesIdentity orthogonal two essential benefits:
+	 * 
+	 *               1. It prevents a transaction from receiving the broadcasts about transaction activity that are
+	 *               intended for contributors. This would be a disaster, because the UserInterfaceTransaction engine
+	 *               must only broadcast notifications to transactions in one specific phase--a transaction masquerading
+	 *               as a contributor would receive notifications in the contributor phase, resulting in an infinite
+	 *               loop or similar chaos.
+	 * 
+	 *               2. An assembly descriptor participates in a complex construction cycle governed by the
+	 *               CompositionRegistry, while the ActorBasedContributor participates in a complex collaboration cycle
+	 *               governed by the UserInterfaceTransaction engine. Each of these cycles has enough potential for
+	 *               developer misunderstanding and confusion on its own, so it would be dangerous to interleave both
+	 *               cycles into a single client class. The @DefinesIdentity annotation makes that impossible.
 	 */
 	@InvocationConstraint(domains = TransactionFacilitation.class)
 	@ExtensionConstraint(domains = TransactionParticipant.class)
@@ -204,7 +233,7 @@ public interface UserInterfaceTransaction
 	void setSession(Session session);
 
 	void transactionIntroduced(Class<? extends UserInterfaceTransaction> introducedTransactionType);
-	
+
 	void addActionsOn(List<UserInterfaceDirective> actions, UserInterfaceActor actor);
 
 	void postDirectResponse(UserInterfaceDirective... actions);
@@ -214,7 +243,7 @@ public interface UserInterfaceTransaction
 	void postNotificationFromAnotherTransaction(UserInterfaceNotification notification);
 
 	void commitTransaction();
-	
+
 	void transactionRolledBack();
 
 	@InvocationConstraint(domains = { TransactionFacilitation.class, TransactionElement.class, TransactionParticipant.class })
