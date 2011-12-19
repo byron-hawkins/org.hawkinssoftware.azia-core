@@ -29,7 +29,8 @@ import org.hawkinssoftware.rns.core.validation.ValidateRead;
 import org.hawkinssoftware.rns.core.validation.ValidateWrite;
 
 /**
- * DOC comment task awaits.
+ * Evaluates access to all fields annotated with @ValidateRead and @ValidateWrite, printing warnings to the console when
+ * a field is access by a thread which does not hold the designated semaphore.
  * 
  * @author Byron Hawkins
  */
@@ -40,6 +41,15 @@ class FieldAccessLockValidator implements ValidateWrite.Validator, ValidateRead.
 {
 	private static final FieldAccessLockValidator INSTANCE = new FieldAccessLockValidator();
 
+	/**
+	 * @JTourBusStop 2, Concurrency invariance with @ValidateRead and @ValidateWrite, FieldAccessLockValidator registers
+	 *               itself as the default validation agent:
+	 * 
+	 *               The @ValidateRead and @ValidateWrite can be directed to any ValidateRead.Validator or
+	 *               ValidateWrite.Validator (respectively), but by default are directed to the globally registered
+	 *               instances. Here the FieldAccessLockValidator registers itself as the default validator for both
+	 *               read and write validation.
+	 */
 	@InvocationConstraint(domains = InitializationDomain.class)
 	static void initialize()
 	{
@@ -47,6 +57,10 @@ class FieldAccessLockValidator implements ValidateWrite.Validator, ValidateRead.
 		ValidateRead.ValidationAgent.setValidator(INSTANCE);
 	}
 
+	/**
+	 * @JTourBusStop 2.1, Concurrency invariance with @ValidateRead and @ValidateWrite, Pointcut for "get" goes by
+	 *               default to FieldAccessLockValidator.validateRead():
+	 */
 	@Override
 	@InvocationConstraint(types = ValidateRead.ValidationAgent.class)
 	public void validateRead(Object reader, Object fieldOwner, String fieldName)
@@ -119,6 +133,10 @@ class FieldAccessLockValidator implements ValidateWrite.Validator, ValidateRead.
 		context.addReadOnlyLock(physicalLock);
 	}
 
+	/**
+	 * @JTourBusStop 2.2, Concurrency invariance with @ValidateRead and @ValidateWrite, Pointcut for "put" goes by
+	 *               default to FieldAccessLockValidator.validateWrite():
+	 */
 	@Override
 	@InvocationConstraint(types = ValidateWrite.ValidationAgent.class)
 	public void validateWrite(Object writer, Object fieldOwner, String fieldName)

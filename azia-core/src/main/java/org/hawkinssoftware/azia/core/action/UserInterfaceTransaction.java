@@ -64,6 +64,40 @@ import org.hawkinssoftware.rns.core.util.DefinesIdentity;
  *               transaction. The value of this orthogonal is simply to focus the purpose of the concrete assembly and
  *               transaction classes--the idea of a class which is both an assembly descriptor and a transaction is just
  *               too confusing to be worthwhile.
+ * 
+ * @JTourBusStop 1, Virtual encapsulation in an Azia user interface transaction, Introducing the
+ *               UserInterfaceTransaction:
+ * 
+ *               In an application built with the Azia library, all changes to mutable fields are governed by
+ *               UserInterfaceTransactions. For every native input event recognized by Azia, a transaction is initiated,
+ *               and user interface components are invited to collaborate by adding UserInterfaceDirectives to the
+ *               transaction. No field values are modified at collaboration time, but when all contributions have been
+ *               made, the internal transaction engine commits the transaction and applies each directive to its
+ *               corresponding field value(s).
+ * 
+ * @JTourBusStop 6, Virtual encapsulation in an Azia user interface transaction, Conclusion - UserInterfaceTransaction
+ *               simulates encapsulation for event processing:
+ * 
+ *               A UserInterfaceTransaction collects user interface responses to a native input event and applies the
+ *               effects of all the responses in sequence. This process simulates some of the characteristics of
+ *               encapsulation on behalf of scattered features, such as the list selection and auto-scroll behavior
+ *               observed in tour stops 4.x.
+ * 
+ *               1. Contiguous Execution: the transaction engine guarantees that all directives in a transaction will be
+ *               executed without interruption from other transactions or state changes. Encapsulating responses to the
+ *               native input event within a single class would be better, because it would allow contiguous collection
+ *               of the events along with contiguous execution of them. But considering that full object-oriented
+ *               encapsulation is often impossible, sequential execution of directives is better than nothing.
+ * 
+ *               2. Colocation of Fields: the transaction model requires that every class field change occur by proxy of
+ *               a UserInterfaceDirective. This configuration makes it possible for every collaborator to see both the
+ *               current values of class fields and the field changes that are in progress on the transaction. When
+ *               state dependencies between fields are scattered across multiple classes--as the size and position of a
+ *               scrollbar knob are scattered from the size and position of the viewport they depend on--it becomes
+ *               necessary for each collaborator to know what kind of changes are in progress. When an entire feature
+ *               (such as maintenance of scrollbar knob bounds) is fully encapsulated within an object-oriented class,
+ *               field changes are well known throughout the class at all times. But considering that most features are
+ *               scattered across multiple classes, runtime introspection of field changes is a workable alternative.
  */
 @InvocationConstraint(domains = TransactionFacilitation.class)
 @VisibilityConstraint(domains = { TransactionParticipant.class, TransactionFacilitation.class, TransactionElement.class }, inherit = true)

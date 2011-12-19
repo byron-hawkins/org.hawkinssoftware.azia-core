@@ -80,7 +80,7 @@ public abstract class UserInterfaceDirective implements UserInterfaceActorDelega
 	{
 		return actor;
 	}
-	
+
 	public List<UserInterfaceActorPreview> getPreviews(UserInterfaceDirective action)
 	{
 		return Collections.emptyList();

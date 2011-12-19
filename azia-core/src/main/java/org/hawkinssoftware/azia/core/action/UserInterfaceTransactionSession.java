@@ -144,6 +144,12 @@ class UserInterfaceTransactionSession
 			}
 		}
 
+		/**
+		 * @JTourBusStop 3.2, Virtual encapsulation in an Azia user interface transaction, MouseEventTransaction
+		 *               initiated:
+		 * 
+		 *               The notification is broadcast by the Azia transaction engine to the topTile (the "actor").
+		 */
 		@Override
 		public void postAction(UserInterfaceActorDelegate actor, UserInterfaceNotification notification)
 		{

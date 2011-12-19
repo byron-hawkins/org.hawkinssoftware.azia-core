@@ -9,6 +9,11 @@ import org.hawkinssoftware.rns.core.moa.ExecutionPath;
 import org.hawkinssoftware.rns.core.moa.ExecutionStackFrame;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 
+/**
+ * Governs the visibility of transactional changes.
+ * 
+ * @author Byron Hawkins
+ */
 @ExecutionPath.NoFrame
 public class UserInterfaceTransactionQuery
 {
@@ -177,6 +182,16 @@ public class UserInterfaceTransactionQuery
 		}
 	}
 
+	/**
+	 * Defines a property of a class which represents one class field and can potentially be read either from the
+	 * transaction (its last assigned value) or from the represented class field (its value on the JVM heap).
+	 * 
+	 * @param <ParentType>
+	 *            Specifies the class which owns the property (i.e., the class field)
+	 * @param <ChildType>
+	 *            Specifies the type of the property (i.e., the class field)
+	 * @author Byron Hawkins
+	 */
 	public static abstract class Property<ParentType, ChildType>
 	{
 		public final String methodName;
